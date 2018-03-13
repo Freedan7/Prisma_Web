@@ -1,0 +1,184 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		
+		<title>Login</title>
+	    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+	    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+	    <link href='css/bootstrap.min.css' rel='stylesheet' media='screen'>
+	    <script src='https://code.jquery.com/jquery.js'></script>
+	    <script   src='https://code.jquery.com/jquery-3.1.0.min.js'   integrity='sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s='   crossorigin='anonymous'></script>
+	    <script src='js/bootstrap.min.js'></script>
+		<script src='//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+		<link rel='stylesheet' href='css/prismaStyle.css' />
+		<script src='https://code.jquery.com/jquery-1.9.1.js'></script>
+		<script src='https://code.jquery.com/ui/1.10.3/jquery-ui.js'></script>
+		<style>
+			html {
+				height: 100%;
+			}
+		</style>
+		<script>
+			/**
+	 		 * @summary Takes a user to a registry page
+	 		 *
+	 		 * This function redirects a user to the page numeracyTest.php, 
+	 		 * where they can register in the Idealist Platform.
+	 		 *
+	 		 * @see function checkCheckBox
+	 		 *
+	 		 * @returns type none.
+	 		 */
+			function register(){
+				if(checkCheckBox()){
+					window.location.href = 'numeracyTest.php';
+				}
+			}
+			
+			/**
+	 		 * @summary Rounds a number
+	 		 *
+	 		 * This function searches for a specific check box, and determines 
+	 		 * whether or not that box is checked. If the box is not checked,
+	 		 * an error message is displayed.
+	 		 *
+	 		 * @returns type boolean. Returns true or false, depending on whether
+	 		 * or not an element is checked.
+	 		 */
+			function checkCheckBox(){
+				var f = document.getElementById('check');
+				if (f.checked == false )
+				{
+					$('#error').show();
+					$('#errorLabel').text('Please check the \"I accept\" box to continue');
+					return false;
+				}
+				else
+					return true;
+			}
+			
+			/**
+	 		 * @summary Opens a popup window
+	 		 *
+	 		 * This function rounds a float to a specified number of decimal spaces.
+	 		 *
+	 		 * @param type $var url. Specifies the url of the popup page.
+	 		 * @param type $var title. Specifies the title of the popup page.
+	 		 * @param type $var w. Specifies the width of the popup window.
+	 		 * @param type $var h. Specifies the height of the popup window.
+	 		 *
+	 		 * @returns type window.open. Returns a command to open the popup window.
+	 		 */
+			function popupCenter(url, title, w, h) {
+					var left = (screen.width/2)-(w/2);
+					var top = (screen.height/2)-(h/2);
+					return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+			}
+			
+			/**
+	 		 * @summary Logs a user into the Idealist Platform.
+	 		 *
+	 		 * This function checks whether or not a user has entered their 
+	 		 * username and password. If this is the case, the user is logged
+	 		 * into the platform, or, if their username or password is invalid,
+	 		 * an error message is displayed.
+	 		 *
+	 		 * @returns type none.
+	 		 */
+			function login(){
+				if(checkCheckBox()){
+					username=$('#username').val();
+					password=$('#password').val()
+					if ($.trim(username)=='' || $.trim(password)=='') {
+						$('#error').show();	
+						$('#errorLabel').text('Username or Password is missing');
+					}
+					else {
+						$.post('script.php',  { id: username, pass: password , login:'true'},
+						  /* The callback that will get executed once the data is back from the server*/
+						  function (result) {
+						  	console.log( result );
+						  
+						    if (result==10) {
+						    	window.location.href = 'tableview.php?id='+username;
+						    	
+						    }
+						    else if (result == 11) {
+						    	window.location.href = 'tableviewAdmin.php?id='+username;
+						    }
+						    else if (result==0) {
+						    	$('#error').show();	
+								$('#errorLabel').text('Username or Password does not match our records');
+						    } 
+						    else{
+						    	$('#error').show();	
+								$('#errorLabel').text(result);
+						    }
+						    
+						  });
+					}
+				}	
+			}
+		</script>
+		</head>
+    <body >
+    	<nav class='navbar navbar-default navbar-static-top'>
+		  <div class='container'>
+			<div class='navbar-header'>
+			</div>
+			<h1 id='header' style='text-align: center'>Idealist Platform</h1>
+			<br />
+		  </div>
+		</nav>
+	    
+    	<br />
+    	
+	    
+    	<div id='sign-in' class='container' align='center'>
+	        <div id='error'class='alert alert-error' hidden>
+		    	<label id='errorLabel'></label>
+		    </div>
+	        <br />
+	       
+	       <h4> Welcome To Prisma-P Lab.</h4>
+           <div id ='Intro' name = 'Intro' >
+           		<p> We at Prisma-P are conducting a survey for doctors. Thank you for your time.</p>
+           		<br />  
+           </div>		 
+
+	        <table align='center'>
+
+	        			<tr>
+	        				<td style='padding-right: 25px;'>Username</td>
+	        				<td><input id='username' class='input-medium' type='text'></td>
+	        			</tr>
+	        			<tr>
+	        				<td style='padding-right: 25px;'>Password</td>
+	        				<td><input id='password' class='input-medium' type='password'></td>
+	        			</tr>
+	    	</table>
+	    	
+	    	<br />
+	    	
+	        <table align='center' style='width: 20%;'>
+				<tr>
+					<td style='padding-right: 25px;'>
+						<button class='btn btn-large btn-primary' role='button' onclick='register()'>Sign Up</button>
+					</td>
+					<td align='right' style='padding-left: 25px;'>
+						<button class='btn btn-large btn-primary' role='button' onclick='login();'>Login</button>
+					</td>
+				</tr>
+			</table>
+	        			
+	        					<div class='checkbox'>
+	        						<br />
+	        						<input id ='check' type='checkbox' value='0' name='check' /><label for='check'>I accept 
+	        							<a  onclick='popupCenter("consent.html", "myPop1",650,650);' href='javascript:void(0);' style='white-space: pre;'>  Our terms and conditions </a>
+	        						</label>
+								</div>
+	        <br /> 
+        </div> 
+         
+    </body>
+</html>

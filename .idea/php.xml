@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpProjectServersManager">
+    <servers>
+      <server host="localhost" id="8dcb3739-1568-47c1-bbf2-a1eb965d2e3b" name="Prisma">
+        <path_mappings>
+          <mapping local-root="$PROJECT_DIR$/index.html" remote-root="C:/xampp1/htdocs/web" />
+          <mapping local-root="$PROJECT_DIR$/script.php" remote-root="C:/xampp1/htdocs/web" />
+        </path_mappings>
+      </server>
+    </servers>
+  </component>
+</project>

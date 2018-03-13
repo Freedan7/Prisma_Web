@@ -1,0 +1,41 @@
+/*These are the table names and the elements / values that I would like stored in them,
+formatted as follows:
+
+table-name [
+	label: 	outcome,
+	label: 	outcome
+]
+	
+I would like for the values for each element in the two tables to be set by default to 
+a NULL integer. The values will be populated when the doctor submits his or her input
+from the surgery risk interface.
+*/
+    
+firstInput [
+	Severe sepsis:						integer,
+	Mechanical ventilation > 48 hours,	integer,
+	Neurologic complications:			integer,
+	RIFLE-AKI in first seven 
+	postoperative days: 				integer,
+	Cardiovascular complications:       integer,
+	Wound complications:				integer,
+	ICU admission > 48 hours:			integer,
+	Venous thromboembolism:				integer
+]
+	
+	
+secondInput [
+	Severe sepsis:						integer,
+	Mechanical ventilation > 48 hours:	integer,
+	Neurologic complications:			integer,
+	RIFLE-AKI in first seven
+	postoperative days: 				integer,
+	Cardiovascular complications:       integer,
+	Wound complications:				integer,
+	ICU admission > 48 hours:			integer,
+	Venous thromboembolism:				integer
+]
+	
+/*
+- Daniel Freeman
+*/

@@ -1,0 +1,569 @@
+/*
+Prisma Style
+
+This stylesheet controls the general aesthetic of the surgery risk calculator,
+including but not limited to color, size, and positioning of elements. It also
+contains a section that allows the application to be mobile responsive.
+
+Created by Daniel Freeman
+_______________________________________________________________________________
+Table of contents:
+
+	Section for general styling:
+
+-------------------
+1	|	Main body of page
+2	|	Tooltip, label, and percentage display styling
+3	|	
+-------------------
+	Section for mobile responsiveness:
+
+1	|	Chart container scaling
+2	|	<>
+*/
+
+/* Main body of page */
+
+	body {
+		background-color: #081021;
+		background-image: url("../img/gatoriskBg.jpg");
+		background-repeat: no-repeat;
+		background-size: cover;
+		height: 100%;
+	}
+	
+	select {
+		font-weight: bold;
+		color: #000;
+	}
+
+	.envelope-text {
+		text-align: left;
+		font-weight: 400;
+		width: 80%;
+		margin: auto;
+	}
+	
+	.input-append {
+		text-align: left;
+		width: 80%;
+	}
+/* Tooltip, label and percentage display styling */
+
+	.tTip {
+		background-color: black;
+		border-radius: 10px;
+		font-size: 16pt;
+		left: 0px;
+		padding: 10px;
+		pointer-events: none;
+		position: absolute;
+		top: 0px;
+		width: 100px;
+		z-index: 2;
+	}
+
+	#tTipLabel {
+		font-size: 9pt;
+	}
+
+	.percentage {
+		pointer-events:none;
+	}
+	
+	.labels {
+		pointer-events:none;
+	}
+
+#headHTML
+	{
+		padding:10px 40px; 
+		background:#0086C4;
+		height:40px;
+		border-top-left-radius:20px;
+		border-top-right-radius:20px; 
+	}
+			
+#envelope
+	{
+		color: #d0d5d9;
+		border-radius:20px;
+		border-color: #081021;
+		border-style: solid;
+		background-color: rgba(8, 16, 33, 0.9);
+		width:66%;				
+		alignment-baseline: central;
+	}
+	
+#sign-in
+	{
+		color: #d0d5d9;
+		border-radius:20px;
+		border-color: #081021;
+		border-style: solid;
+		background-color: rgba(8, 16, 33, 0.9);
+		width:50%;				
+		alignment-baseline: central;
+	}
+	
+#header {
+	font-size: 5vh;
+	color: #d0d5d9;
+}
+
+#error {
+	color: #d0d5d9;
+	background-color: rgba(255, 13, 0, 0.5);
+	border-color: #081021;
+}
+
+/* Chart container styling */
+
+.clickHere {
+	font: bold 40px Arial;
+}
+
+/*	#chart,		*/
+	.chart-envelope,
+	.predictionChart,
+	.predictionChartThumb
+	{
+		border-radius:20px;
+		border-color: #d0d5d9;
+		/* border-style: solid; */
+		margin: auto;
+		width:70%;
+		height: 50%;
+		alignment-baseline: central;
+		background-size: 60% 20%;
+		/* background-color: #081021; */
+	}
+
+/* These items are meant to be displayed over the charts */
+
+	#chart-overlay {
+		width: 20%;
+		position: absolute;
+		z-index: 1;
+		cursor: pointer;
+		cursor: hand;
+	}
+	
+	#increasingTable {
+		width: 100%;
+	}
+	
+	#increasingRisk {
+	
+	}
+	
+	#decreasingTable {
+		width: 100%;
+	}
+	
+	#decreasingRisk {
+	
+	}
+
+	input[name="riskFactors"] {
+		display: none;
+	}
+	
+	input[name="riskFactors"]:not(:checked) + label {
+		background-color: #081021;
+		border-color: #66737f;
+		color: #8e99a4;
+	}
+	
+	input[name="riskFactors"]:checked + label {
+		background-color: #193167;
+		border-color: #fff;
+	}
+
+
+	#riskFactorToggle label {
+		cursor: pointer;
+		padding: 5px 18px 5px 18px;
+		border: 1px solid;
+		border-radius: 10px 10px 0 0;
+	}
+	
+	#riskFactorToggle label:hover {
+		background-color: #d0d5d9;
+		color: #193167;
+	}
+
+	#mortality-risk {
+		background-color: #081021;
+		border-radius:20px;
+		border-color: #d0d5d9;
+		border-style: solid;
+		font-size: 16px;
+		font-weight: 700;
+		padding: 10px;
+		right: 25%;
+		position: absolute;
+		z-index: 1;
+		cursor: pointer;
+		cursor: hand;
+	}
+	
+	#mortality-risk-modal {
+		background-color: #081021;
+		border-radius:20px;
+		border-color: #d0d5d9;
+		border-style: solid;
+		font-size: 16px;
+		font-weight: 700;
+		padding: 10px;
+		right: 15%;
+		position: absolute;
+		z-index: 1;
+		cursor: pointer;
+		cursor: hand;
+	}
+
+	#mortality-num {
+		font-size: 32px;
+		font-weight: 400;
+	}
+
+	#over-chart
+	{
+		position: absolute;
+		top: 0px;
+		bottom: 0px;
+		left: 0px;
+		right: 0px;
+	}
+
+#patIDs {
+	text-align: center;
+	font-size: 20px;
+}
+
+#patDesc {
+	font-weight: normal;
+	font-size: 16px;
+}
+
+#directions {
+		/* position: relative;
+		top: -15vh; */
+}
+
+/*
+#submit-btn {
+	position: relative;
+	top: -5vh;
+}
+*/
+	
+.navbar-static-top {
+    box-shadow: 0px 0px 5px #081021;
+    height: 10vh;
+  	margin-bottom: 19px;
+  	border-bottom-width: 2px;
+  	border-color: #081021;
+  	background-color: #081021;
+}
+
+/* Button styling */
+
+	.btn-primary {
+		background-color: #0021A5;
+		border-color: #002ee6;
+		margin: auto;
+	}
+
+	.btn-primary:hover {
+		background-color: #0029cc;
+		border-color: #002ee6;
+	}
+
+	.btn-default {
+		background-color: #081021;
+		border-color: #66737f;
+		color: #8e99a4;
+		margin: auto;
+	}
+
+	.btn-default:hover {
+		background-color: #0f1e3e;
+		border-color: #d0d5d9;
+		color: #d0d5d9;
+	}
+
+	.btn-info {
+		background-color: red;
+	}
+
+	.btn-info:active {
+		background-color: red;
+	}
+
+/* Modal styling */
+
+.modal-dialog {
+	width: 60%;
+}
+
+.modal-content {
+	color: #d0d5d9;
+	border-color: #d0d5d9;
+	background-color: #081021;
+	text-shadow: 0 1px 0 black;
+}
+
+#story-body {
+	max-height: 70vh;
+	overflow-y: auto;
+}
+
+#ptable-body {
+	max-height: 70vh;
+	overflow-y: auto;
+}
+
+.close {
+	color: #d0d5d9;
+	opacity: 1;
+}
+
+.close:hover {
+	color: #4773d1;
+}
+
+#factor-modal-content {
+	margin: auto;
+}
+
+#prediction-table {
+	margin: auto;
+}
+
+/* Patient Info Tables */
+
+.tabs input[type = radio] {
+	display: none;
+}
+
+.tabs [id^='tab']:checked + label {
+	background-color: #0021A5;
+	border: 1px solid #002ee6;
+	color: #d0d5d9;
+}
+
+.tabs [id^='tab']:checked + label:hover {
+	background-color: #0029cc;
+	border: 1px solid #002ee6;
+	color: #d0d5d9;
+}
+
+.tabs label {
+	background-color: #081021;
+	border: 1px solid #66737f;
+	border-radius: 5px;
+	color: #8e99a4;
+	cursor: pointer;
+	padding: 5px 10px;
+	width: 120px;
+}
+
+.tabs label:hover {
+	background-color: #0f1e3e;
+	border: 1px solid #d0d5d9;
+	color: #d0d5d9;
+}
+
+.patLabsTable {
+	margin: 5px;
+	border: 1px solid #fff;
+}
+
+.patLabsTable td {
+	width: 70px;
+	border: 1px solid;
+	padding: 5px 10px;
+}
+
+/* SVG styling */
+
+.svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    vertical-align: top;
+    overflow: hidden;
+}
+.svg-content {
+    display: inline-block;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+
+
+input[type=text],
+input[type=password],
+input[type=number] {
+	color: black;
+	font-weight: bold;
+	border: 2px solid #081021;
+    border-radius: 4px;
+}
+
+input[type=checkbox] {
+  width: 15px;
+  height: 15px;
+  padding: 0;
+  margin:0;
+}
+
+/* Check box styling
+
+input[type=checkbox]:not(old){
+  	width: 2em;
+  	margin: 0;
+  	padding: 0;
+  	font-size: 1em;
+  	opacity: 0;
+  }
+  
+  input[type=checkbox]:not(old) + label {
+  	display: inline-block;
+  	margin-left: 2em;
+  	line-height: 1.5em;
+  }
+  
+  input[type=checkbox]:not(old) + label > span {
+  	display: inline-block;
+  	width: 0.875em;
+  	height: 0.875em;
+  	margin: 0.25em 0.5em 0.25em 0.25em;
+  	border: 0.0625em solid rgb(192, 192, 192);
+  	border-radius: 0.25em;
+  	background: rgb(224, 224, 224);
+  	background-image: -moz-linear-gradient(rgb(240, 240, 240), rgb(224, 224, 224));
+  	vertical-align: bottom;
+  }
+  
+  input[type=checkbox]:not(old):checked + label > span {
+  	display: inline-block;
+  	width: 0.875em;
+  	height: 0.875em;
+  	margin: 0.25em 0.5em 0.25em 0.25em;
+  	border: 0.0625em solid rgb(192, 192, 192);
+  	border-radius: 0.25em;
+  	background: rgb(224, 224, 224);
+  	background-image: -moz-linear-gradient(black, rgb(31, 61, 125));
+  	vertical-align: bottom;
+  }
+  
+  input[type=checkbox]:not(old):checked + label > span:before{
+  	content     : '✓';
+  	display     : block;
+  	width       : 1em;
+  	color       : #4382e8;
+  	font-size   : 0.875em;
+  	line-height : 1em;
+  	text-align  : center;
+  	text-shadow : 0 0 0.0714em rgb(115,153,77);
+  	font-weight : bold;
+}
+*/
+
+/*---------------------------------------------------------------------------*/
+
+/* The following portion of the stylesheet allows the application to be mobile
+responsive, scaling  individual elements to better suit smaller phone and
+tablet screens. */
+
+@media only screen and (max-width: 960px) {
+
+/* Envelope Scaling */
+
+	#envelope {
+		width: 98%;
+	}
+
+/* Chart container scaling */
+	.clickHere {
+		font: bold 60px Arial;
+	}
+
+	.chart-envelope,
+	.predictionChart,
+	.predictionChartThumb
+	{
+		width:100%;
+	}
+	
+	.modal-chart {
+		width: 100%
+	}
+	
+	.modal-dialog {
+		width: 90%;
+	}
+	
+	.percentage {
+		font-size: 18px;
+	}
+	
+	
+	
+    #sign-in {
+        width: 90%;
+    }
+    
+    #chart-thumbnail {
+    	display: none;
+    }
+
+	/**/
+	.nav > li > a {
+		font-size: 8pt;
+		padding: 5px 10px;
+		width: 70px;
+		height: 60px;
+	}
+
+/* Risk Factors modal scaling */
+	#factor-modal-content {
+		width: 100%;
+	}
+    
+    
+/* Mortality risk display scaling */
+    #mortality-risk {
+		border-radius: 10px;
+		font-size: 9px;
+		padding: 5px;
+		right: 10%;
+	}
+	
+	#mortality-risk-modal {
+		border-radius: 10px;
+		font-size: 9px;
+		padding: 5px;
+		right: 5%;
+	}
+	
+	#mortality-num {
+		font-size: 18px;
+	}
+	
+	#directions {
+		position: relative;
+		top: -3vh;
+	}
+	/*
+	#submit-btn {
+		position: relative;
+		top: -8vh;
+	}
+	*/
+}
