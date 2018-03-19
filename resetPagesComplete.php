@@ -28,10 +28,10 @@
 	}
 			
 	if ( $_SESSION["isAdmin"] != true ) {
-		header( 'Location: tableview.php?id='.$docID );
+		header( 'Location: tableview.php?docID='.$docID );
 	}
 	else if ( $_SESSION["isAdmin"] == true ) {
-		header( 'Location: tableviewAdmin.php?id='.$_SESSION["adminID"] );
+		header( 'Location: tableviewAdmin.php?docID='.$_SESSION["adminID"] );
 	}
 	else {
 		$errType = 'nullErr';
