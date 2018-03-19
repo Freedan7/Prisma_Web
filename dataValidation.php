@@ -1,11 +1,25 @@
 <?php
+	session_start();
+	
+	if ( isset( $_SESSION["docID"])) {
+		if ( $_SESSION["isAdmin"] == true ) {
+			// Continue
+		}
+		else if ( $_SESSION["docID"] != htmlspecialchars( $_GET['docID'] ) ) {
+			header( 'Location: index.html' );
+		}
+	}
+	else {
+		header( 'Location: index.html' );
+	}
+
 	require_once __DIR__.'/urlPath.php';
 	require_once __DIR__.'/RestCurl.php';
 	
 	switch ( $page ) {
 		// If user logged in as an Admin
 		case 11:
-			$docID = htmlspecialchars( $_GET['id'] );
+			$docID = htmlspecialchars( $_GET['docID'] );
 			
 			$url = $urlPath.'patientsAdmin?doctorId='.$docID;
 			$patient_detail = $curl->getData($url);
@@ -31,7 +45,7 @@
 		// List of patients
 		case 0:			
 			ini_set('max_execution_time', 300);
-			$docID = htmlspecialchars( $_GET['id'] );
+			$docID = htmlspecialchars( $_GET['docID'] );
 			
 			$url = $urlPath.'patients?doctorId='.$docID;
 			$patient_detail = $curl->getData($url);
