@@ -19,6 +19,7 @@
 				
 				// Start a session, set admin to "False"
 				session_start();
+				$_SESSION["docID"] = $username;
 				$_SESSION["isAdmin"] = false;
 			}
 			else if ( $loginInfo['role'] == 'Administrator' ) {
@@ -26,8 +27,8 @@
 				
 				// Start a session, set admin to "True"
 				session_start();
+				$_SESSION["docID"] = $username;
 				$_SESSION["isAdmin"] = true;
-				$_SESSION["adminID"] = $username;
 			}
 			else {
 				echo 'Username or password does not match our records';

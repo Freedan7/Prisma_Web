@@ -42,6 +42,7 @@
 	$emergent = $patientDetailsRaw[0]['featureValueMap']['emergent'];
 	$surgeryType = $patientDetailsRaw[0]['featureValueMap']['surgery_type'];
 	$primaryProcedure = $patientDetailsRaw[0]['featureValueMap']['primary_proc'];
+	$primaryProcedureDescription = $patientDetailsRaw[0]['featureValueMap']['primary_proc_description'];
 	$bloodTests = round($patientDetailsRaw[0]['featureValueMap']['count_hgbn_0_7'], 2);
 	$urineTests = round($patientDetailsRaw[0]['featureValueMap']['count_hgburn_0_7'], 2);
 	$averageLabValues = round($patientDetailsRaw[0]['featureValueMap']['hgb_avg_0_7'], 2);
@@ -76,9 +77,9 @@
 	$payer = $patientDetailsRaw[0]['featureValueMap']['payer'];
 	$county = $patientDetailsRaw[0]['featureValueMap']['county'];
 	$rural = $patientDetailsRaw[0]['featureValueMap']['rural'];
-	$population = $patientDetailsRaw[0]['featureValueMap']['total'];
-	$propBlack = round($patientDetailsRaw[0]['featureValueMap']['prop_black'], 2);
-	$propHisp = round($patientDetailsRaw[0]['featureValueMap']['prop_hisp'], 2);
+	$population = round($patientDetailsRaw[0]['featureValueMap']['total'], 0);
+	$propBlack = round($patientDetailsRaw[0]['featureValueMap']['prop_black'], 2) * 100;
+	$propHisp = round($patientDetailsRaw[0]['featureValueMap']['prop_hisp'], 2) * 100;
 	$medianIncome = round($patientDetailsRaw[0]['featureValueMap']['median_income'], 2);
 	$percBelowPoverty = round($patientDetailsRaw[0]['featureValueMap']['perc_below_poverty'], 2);
 	
@@ -182,13 +183,13 @@
 	
 	// A single day?
 	if ($surgeryTime == 1) {
-		$surgeryTime = '1 day';
+		$surgeryTime = '1 day ago';
 	}
-	else if ( $surgeryTime == 'missing' ) {
-		$surgeryTime = '0 days';
+	else if ( $surgeryTime == 'missing' ||  $surgeryTime == 0) {
+		$surgeryTime = 'today';
 	}
 	else {
-		$surgeryTime = $surgeryTime.' days';
+		$surgeryTime = $surgeryTime.' days ago';
 	}
 	
 	// Race
@@ -229,6 +230,11 @@
 	}
 	else if ($emergent == 0) {
 		$emergent = 'elective';
+	}
+	
+	// Primary procedure missing?
+	if ( $primaryProcedureDescription == 'missing' ) {
+		$primaryProcedureDescription = 'unspecified primary procedure';
 	}
 	
 	// More than 1 Blood Test?
@@ -325,10 +331,6 @@
 		$medications = $medications."Diuretics</br>";
 		$admissionMeds++;
 	}
-	if ($nephrotoxic > 0) {
-		$medications = $medications.$nephrotoxic." Nephrotoxic Drugs</br>";
-		$admissionMeds++;
-	}
 	if ($nsaids == 1) {
 		$medications = $medications."Nonsteroidal Anti-Inflammatory Drugs</br>";
 		$admissionMeds++;
@@ -351,7 +353,7 @@
 		$admissionMeds = '';
 	}
 	else {
-		$admissionMeds = 'The patient\'s Admission medicines include:'."</br>";
+		$admissionMeds = 'Patient medication history includes:'."</br>";
 	}
 
 	if ($numMeds == 0) {
@@ -384,14 +386,15 @@
 							.'. The patient has a history of '.$comorbidityCount."</br>";
 	
 	$patientDetailsText2 = 'The patient was admitted to the hospital '.$surgeryTime.' '
-		.'days ago '.$surgeryWeekend.' from a '.$transfer.' admission setting, and'
-		.' is scheduled to have an '.$emergent.' '.$surgeryType.' surgery, specifically '
-		.$primaryProcedure.'. Within one week of surgery there '.$bloodTests.' and '.$urineTests
-		.', and the average laboratories\' values are HGB '.$averageLabValues.' g/dl, worst urine glucose level is '
-		.$urineGlucose.', worst urine hemoglobin level is '.$urineHemoglobin.', serum platelets '.$serumPlatelets
-		.', red blood counts '.$redBloodCount.', and hematocrit '.$hematocrit
-		.'%. And within one year urine protein strip test analysis is '.$urineProtein
-		.'. The estimated GFR is '.$estimatedGfr.' ml/min/1.72.m2 while the ratio of reference '
+		.' '.$surgeryWeekend.' from a '.$transfer.' admission setting, and'
+		.' is scheduled to have an '.$emergent.' '.$surgeryType.' surgery, specifically a(n) '
+		.$primaryProcedureDescription.'. Within one week of surgery there '.$bloodTests.' and '.$urineTests
+		.', and the average laboratory values are as follows: HGB '.$averageLabValues.' (g/dl)'
+		.', serum platelets '.$serumPlatelets.' (thou/mm'."<sup>3</sup>".'), erythrocyte count '
+		.$redBloodCount.' (million/UI), and hematocrit '.$hematocrit.' (%), while the highest urine glucose level is '
+		.$urineGlucose.' and the highest urine hemoglobin level is '.$urineHemoglobin
+		.'. Within one year, urine protein strip test analysis is '.$urineProtein
+		.'. The estimated GFR is '.$estimatedGfr.' (ml/min/1.72.m'."<sup>2</sup>".') while the ratio of reference '
 		.'creatinine to MDRD creatinine is '.$mdrdCreatinine.'. '.$admissionMeds.$medications;
 	
 	
@@ -403,33 +406,14 @@
 	else if ($rural == 0) {
 		$rural = 'urban';
 	}
-	
-	// If the page is "tableview.php", use the summary text
-	if ( $page == 0 ) {
-		/*$patientDetailsSummary = 'Your patient is a(n) '.$patientAge.' year old '.$patientRace
-		.' '.$patientSex.' with a history of '.$comorbidityCount.'. The patient '
-		.'was admitted to the hospital '.$surgeryTime.' ago from a '.$transfer.' setting,'
-		.' and was scheduled for a '.$primaryProcedure.'.'."</br></br>"
-		.'Data received on '
-		.$timestamp;*/
-		
-		//Your patient is a(n) <age> year old <gender> with <race> race and with a Charlson 
-		//comorbidity index of <CCI> with the history of  comorbidities: {list comorbidity  
-		//names with values equal to 1 among the list:
-		
-		$patientDetailsSummary = 'Your patient is a(n) '.$patientAge.' year old '.$patientSex
-		.' with '.$patientRace. ' race, and a Charlson comorbidity index of '.$cci.'.';
-	}
-	else {
 
-		$patientDetailsText3 = 'The patient has '.$payer.' insurance and resides in '
-		.$county.' county in a(n) '.$rural.' area with a total population of '.$population
-		.'. The percentage of African-Americans and Hispanics in the patient\'s neighborhood'
-		.' is '.$propBlack.'% and '.$propHisp.'%, respectively. The overall median income '
-		.'for their neighborhood is $'.$medianIncome.', and '.$percBelowPoverty.'% of the '
-		.'population lives below the poverty level.';
-		
-		$patientDetailsTextFull = $patientDetailsText1.$comorbidities."<br/>"
-								.$patientDetailsText2.$patientDetailsText3;
-	}
+	$patientDetailsText3 = 'The patient has '.$payer.' insurance and resides in '
+	.$county.' county in a(n) '.$rural.' area with a total population of '.$population
+	.'. The percentage of African-Americans and Hispanics in the patient\'s neighborhood'
+	.' is '.$propBlack.'% and '.$propHisp.'%, respectively. The overall median income '
+	.'for their neighborhood is $'.$medianIncome.', and '.$percBelowPoverty.'% of the '
+	.'population lives below the poverty level.';
+	
+	$patientDetailsTextFull = $patientDetailsText1.$comorbidities."<br/>"
+							.$patientDetailsText2.$patientDetailsText3;
 ?>

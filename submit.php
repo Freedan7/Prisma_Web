@@ -109,7 +109,7 @@
 			$pagesUrl = $urlPath.'insertPageComplete?doctorId='.$docID.'&patientId='.$ptID.'&pagesComplete=4';
 			echo $curl->postData( $pagesUrl );
 			
-	        header( 'Location: LastScreen.php?id='.$docID.'&scrnID=2');
+	        header( 'Location: LastScreen.php?docID='.$docID.'&scrnID=2');
 	}
 	else if(isset($_GET['recoPos'])){
 			$ptID=$_GET['id'];
@@ -181,7 +181,7 @@
 			$pagesUrl = $urlPath.'insertPageComplete?doctorId='.$docID.'&patientId='.$ptID.'&pagesComplete=4';
 			echo $curl->postData( $pagesUrl );
 			
-			header( 'Location: LastScreen.php?id='.$docID.'&scrnID=2');
+			header( 'Location: LastScreen.php?docID='.$docID.'&scrnID=2');
 	}
 	else if(isset($_GET['continue'])){
 		$docID = htmlspecialchars( $_GET['docID'] );
@@ -198,10 +198,10 @@
 		}
 				
 		if ( $_SESSION["isAdmin"] != true ) {
-			header( 'Location: tableview.php?id='.$docID );
+			header( 'Location: tableview.php?docID='.$docID );
 		}
 		else if ( $_SESSION["isAdmin"] == true ) {
-			header( 'Location: tableviewAdmin.php?id='.$_SESSION["adminID"] );
+			header( 'Location: tableviewAdmin.php?docID='.$_SESSION["docID"] );
 		}
 		else {
 			$errType = 'nullErr';

@@ -138,7 +138,7 @@
 					  							  		
 							for($i=0;$i<count($patient_detail1);$i++){
 								$ptID  =  $patient_detail1[$i]['patientId'];
-								$patientAge = $patient_detail1[$i]['featureValueMap']['age'];
+								$patientAge = round($patient_detail1[$i]['featureValueMap']['age'], 0);
 								$patientSex = strtolower($patient_detail1[$i]['featureValueMap']['sex']);
 								$patientRace = strtolower($patient_detail1[$i]['featureValueMap']['race']);
 								$cci = $patient_detail1[$i]['featureValueMap']['cci'];
