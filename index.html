@@ -31,7 +31,7 @@
 	 		 */
 			function register(){
 				if(checkCheckBox()){
-					window.location.href = 'numeracyTest.php';
+					window.location.href = 'signup/numeracyTest.php';
 				}
 			}
 			
@@ -94,17 +94,17 @@
 						$('#errorLabel').text('Username or Password is missing');
 					}
 					else {
-						$.post('script.php',  { id: username, pass: password , login:'true'},
+						$.post('submission/script.php',  { id: username, pass: password, login:'true'},
 						  /* The callback that will get executed once the data is back from the server*/
 						  function (result) {
 						  	console.log( result );
 						  
 						    if (result==10) {
-						    	window.location.href = 'tableview.php?docID='+username;
+						    	window.location.href = 'landingPages/tableview.php?docID='+username;
 						    	
 						    }
 						    else if (result == 11) {
-						    	window.location.href = 'tableviewAdmin.php?docID='+username;
+						    	window.location.href = 'landingPages/tableviewAdmin.php?docID='+username;
 						    }
 						    else if (result==0) {
 						    	$('#error').show();	
